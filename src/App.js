@@ -1,16 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function Food({fav, info}) {
-  
-  return  <div><h1>I like {fav}</h1>
-          <div>{info}</div></div>;
-}
 
 const foodIlike = [
   {
     key : 1,
-    name : "kimchi",
-    info : "red, korea traditional food"
+    name : "kimchi2",
+    info : "red, korea traditional food",
+    rating : 5
   },
   {
     key: 2,
@@ -19,15 +16,26 @@ const foodIlike = [
   }
 ];
 
-function renderFood(item) {
-  console.log(item);
-  return <Food key={item.key} fav={item.name} info={item.info}/>;
+function Food({name, info, rating}) {
+  
+  return  <div>
+            <h1>I like {name}</h1>
+            <h2>{rating}</h2>
+            <div>{info}</div>
+          </div>;
 }
+
+Food.propTypes = {
+  name:PropTypes.string.isRequired,
+  info:PropTypes.string.isRequired,
+  rating:PropTypes.number
+};
+
 
 function App() {
   return  <div>
             <h1>Hello React!</h1>
-            {foodIlike.map(renderFood)} 
+            {foodIlike.map(item => <Food key={item.key} name={item.name} info={item.info} rating={item.rating}/>)} 
           </div>;
 }
 
